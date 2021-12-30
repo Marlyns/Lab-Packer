@@ -1,0 +1,55 @@
+{
+  "builders": [
+    {
+      "boot_command": [
+        "<enter><wait><f6><esc><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "<bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs><bs>",
+        "/install/vmlinuz<wait>",
+        " initrd=/install/initrd.gz<wait>",
+        " auto<wait>",
+        " console-setup/ask_detect=false<wait>",
+        " console-setup/layoutcode=us<wait>",
+        " console-setup/modelcode=pc105<wait>",
+        " debconf/frontend=noninteractive<wait>",
+        " debian-installer=fr_FR<wait>",
+        " fb=false<wait>",
+        " kbd-chooser/method=fr<wait>",
+        " keyboard-configuration/layout=FR<wait>",
+        " keyboard-configuration/variant=FR<wait>",
+        " locale=fr_FR<wait>",
+        " netcfg/get_domain={{user `domain`}}<wait>",
+        " netcfg/get_hostname={{user `hostname`}}<wait>",
+        " grub-installer/bootdev=/dev/sda<wait>",
+        " noapic<wait>",
+        " preseed/url=http://{{ .HTTPIP }}:{{ .HTTPPort }}/preseed.cfg<wait>",
+        " -- <wait>",
+        " <enter><wait>"
+      ],
+      "cpus": "1",
+      "disk_size": "20000",
+      "format": "ova",
+      "guest_additions_mode": "upload",
+      "guest_os_type": "Ubuntu_64",
+      "headless": "false",
+      "http_directory": "http",
+      "iso_checksum": "sha256:f5cbb8104348f0097a8e513b10173a07dbc6684595e331cb06f93f385d0aecf6",
+      "iso_target_path": "./iso/ubuntu-18.04.6-server-amd64.iso",
+      "iso_url": "https://cdimage.ubuntu.com/ubuntu/releases/18.04/release/ubuntu-18.04.6-server-amd64.iso",
+      "memory": "1024",
+      "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now",
+      "ssh_password": "{{user `ssh_pass`}}",
+      "ssh_timeout": "20m",
+      "ssh_username": "{{user `ssh_user`}}",
+      "type": "virtualbox-iso",
+      "vm_name": "{{user `hostname`}}"
+    }
+  ],
+  "variables": {
+    "domain": "local",
+    "hostname": "ubuntu",
+    "ssh_pass": "root2021",
+    "ssh_user": "ubuntu"
+  }
+}
